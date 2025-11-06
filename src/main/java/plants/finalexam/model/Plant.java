@@ -2,6 +2,8 @@ package plants.finalexam.model;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -22,14 +25,14 @@ public class Plant {
     private Integer id;
 
     @NotBlank(message = "Scientific name cannot be blank,empty or null")
-    private String scientific_name ;
+    private String scientificName ;
     @NotBlank(message = "Common name cannot be blank,empty or null")
-    private String common_name;
+    private String commoNname;
     @NotBlank(message = "Family name cannot be blank,empty or null")
-    private String family;
-    private String image_url;
-    @NotBlank(message = "Toxicity cannot be blank,empty or null")
-    private boolean toxic;
+    
+    private String imageUrl;
+    
+    private boolean toxic = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "benefit_plant",
@@ -41,7 +44,83 @@ public class Plant {
     @JoinTable(name = "controindication_plant",
                 joinColumns = @JoinColumn(name="plant_id"),
                 inverseJoinColumns = @JoinColumn(name="controindication_id"))
-    private Set<Benefit> controindications;
+    private Set<Controindication> controindications;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "family_id")
+    @JsonBackReference
+    private Family family;
 
 
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getScientificName() {
+        return this.scientificName;
+    }
+
+    public void setScientificName(String scientificName) {
+        this.scientificName = scientificName;
+    }
+
+    public String getCommoNname() {
+        return this.commoNname;
+    }
+
+    public void setCommoNname(String commoNname) {
+        this.commoNname = commoNname;
+    }
+
+    public String getImageUrl() {
+        return this.imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public boolean isToxic() {
+        return this.toxic;
+    }
+
+    public boolean getToxic() {
+        return this.toxic;
+    }
+
+    public void setToxic(boolean toxic) {
+        this.toxic = toxic;
+    }
+
+    public Set<Benefit> getBenefits() {
+        return this.benefits;
+    }
+
+    public void setBenefits(Set<Benefit> benefits) {
+        this.benefits = benefits;
+    }
+
+    public Set<Controindication> getControindications() {
+        return this.controindications;
+    }
+
+    public void setControindications(Set<Controindication> controindications) {
+        this.controindications = controindications;
+    }
+
+
+    public Family getFamily() {
+        return this.family;
+    }
+
+    public void setFamily(Family family) {
+        this.family = family;
+    }
+
+
+    
 }

@@ -2,7 +2,7 @@ package plants.finalexam.model;
 
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,14 +10,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "controindication")
-public class Controindication {
-    
+@Table(name = "family")
+public class Family {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -26,9 +26,10 @@ public class Controindication {
     @Lob
     private String description;
 
-    @ManyToMany(mappedBy = "controindications", fetch = FetchType.EAGER)
-    @JsonBackReference
+    @OneToMany(mappedBy = "family",  fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<Plant> plants;
+
 
     public Integer getId() {
         return this.id;

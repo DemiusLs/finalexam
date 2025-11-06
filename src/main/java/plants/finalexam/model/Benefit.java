@@ -29,4 +29,38 @@ public class Benefit {
     @ManyToMany(mappedBy = "benefits", fetch = FetchType.EAGER)
     @JsonBackReference
     private Set<Plant> plants;
+
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<Plant> getPlants() {
+        return this.plants;
+    }
+
+    public void setPlants(Set<Plant> plants) {
+        this.plants = plants;
+    }
+
 }
