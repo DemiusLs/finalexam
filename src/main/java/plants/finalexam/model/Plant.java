@@ -27,7 +27,7 @@ public class Plant {
     @NotBlank(message = "Scientific name cannot be blank,empty or null")
     private String scientificName ;
     @NotBlank(message = "Common name cannot be blank,empty or null")
-    private String commoNname;
+    private String commonName;
     @NotBlank(message = "Family name cannot be blank,empty or null")
     
     private String imageUrl;
@@ -68,12 +68,12 @@ public class Plant {
         this.scientificName = scientificName;
     }
 
-    public String getCommoNname() {
-        return this.commoNname;
+    public String getCommonName() {
+        return this.commonName;
     }
 
-    public void setCommoNname(String commoNname) {
-        this.commoNname = commoNname;
+    public void setCommonName(String commonName) {
+        this.commonName = commonName;
     }
 
     public String getImageUrl() {

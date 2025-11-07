@@ -1,0 +1,49 @@
+package plants.finalexam.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import plants.finalexam.Repository.ControindicationRepository;
+
+import plants.finalexam.model.Controindication;
+import plants.finalexam.model.Plant;
+
+public class ControService {
+
+    @Autowired
+    private ControindicationRepository controindicationRepo;
+    
+    public List<Controindication> findAll(){
+        return controindicationRepo.findAll();
+    }
+
+    public Controindication getById(Integer id){
+        return controindicationRepo.findById(id).get();
+    }
+
+    public Optional<Controindication> findById(Integer id){
+        return controindicationRepo.findById(id);
+    }
+
+    public Controindication create(Controindication controindication){
+        return controindicationRepo.save(controindication);
+    }
+
+    public Controindication update(Controindication controindication){
+        return controindicationRepo.save(controindication);
+    }
+
+    public void delete(Controindication controindication){
+        for(Plant plant : controindication.getPlants()){
+            plant.getControindications().remove(controindication);
+        }
+        controindicationRepo.delete(controindication);
+    }
+
+    public void deleteById(Integer id){
+        Controindication controindication = getById(id);
+        controindicationRepo.delete(controindication);
+    }
+}
