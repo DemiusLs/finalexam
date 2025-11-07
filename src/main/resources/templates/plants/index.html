@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+     <th:block th:replace="~{fragments/resources :: headTags}"></th:block>
+</head>
+<body>
+
+     <header>
+        <th:block th:replace="~{fragments/fragments :: navigationBar}"></th:block> 
+    </header> 
+
+    
+    <main>
+
+        <section>
+            <div class="container">
+
+            
+                <h3>Tabella delle piante</h3>    
+                <div class="row">
+                    <div class="col-12" th:if="${plants.size() > 0}">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">scientificName</th>
+                                    <th scope="col">commonName</th>
+                                    <th scope="col">imageUrl</th>
+                                    <th scope="col">toxic</th>
+                                    <th scope="col">benefits</th>
+                                    <th scope="col">controindications</th>
+                                    <th scope="col">family</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="plant : ${plants}" th:object="${plant}">
+                                    <td th:text="*{scientificName}"></td>
+                                    <td th:text="*{commonName}"></td>
+                                    <td th:text="*{imageUrl}"></td>
+                                    <td th:text="*{toxic}"></td>
+                                    <td th:text="*{benefits}"></td>
+                                    <td th:text="*{controindications}"></td>
+                                    <td th:text="*{family}"></td>
+                                
+                                </tr>
+                                
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-12" th:unless="${plants.size() > 0}">
+                        <span>Non ci sono ancora elementi in tabella</span>
+                    </div>
+                    
+                </div>
+                
+            
+            
+
+            </div>
+
+
+            
+        </section>
+        
+        
+
+    </main>
+
+    <footer>
+
+    </footer>
+
+     <th:block th:replace="~{fragments/resources :: scripts}"></th:block> 
+</body>
+</html>

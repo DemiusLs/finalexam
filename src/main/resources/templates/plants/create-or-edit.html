@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create or Edit</title>
+
+     <th:block th:replace="~{fragments/resources :: headTags}"></th:block>
+</head>
+<body>
+
+     <header>
+        <th:block th:replace="~{fragments/fragments :: navigationBar}"></th:block> 
+    </header> 
+    
+    <main>
+
+        <section>
+            <div class="container">
+
+            
+                <h3 th:text="${edit} ? |Editing plant : ${plant.commonName} | :|Creating a new plant|"></h3>    
+                <div class="row">
+                    <div class="col-12" >
+                        
+                        <form id="plant-form" th:action="${edit} ? @{/plants/{id}/edit (id=${plant.id})} : @{/plants/create}" method="post" th:object="${plants}">
+                            <div class="mb-3">
+                                <label for="commonName" class="form-label">Common Name:</label>
+                                <input type="text" class="form-control" id="commonName"  th:field="*{commonName}" th:errorClass="is-invalid">                                
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('commonName')}">
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors('commonName')}" th:text="${err}" ></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="scientificName" class="form-label">Scientific Name:</label>
+                                <input type="text" class="form-control" id="scientificName" th:field="*{scientificName}" th:errorClass="is-invalid">                                
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('scientificName')}">
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors('scientificName')}" th:text="${err}" ></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="imageUrl" class="form-label">Common Name:</label>
+                                <input type="text" class="form-control" id="imageUrl" th:field="*{imageUrl}" th:errorClass="is-invalid">                                
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('imageUrl')}">
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors('imageUrl')}" th:text="${err}" ></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Aggiungere i checkbox per Benefit e Controindications -->
+                             <!-- Aggiungere il select per la famiglia -->
+
+
+                            
+                           <div class="mb-3 d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary" value="create" th:text="${edit} ? |Update plant| : |Create plant|"></button>
+                                <button type="reset" class="btn btn-warning" value="reset">Reset all fields</button>
+                           </div>
+                            
+                        </form>
+                    </div>
+                </div>
+                
+            
+            
+
+            </div>
+
+
+            
+        </section>
+        
+        
+
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <th:block th:replace="~{fragments/resources :: scripts}"></th:block> 
+</body>
+</html>
