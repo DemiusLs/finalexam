@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import plants.finalexam.Repository.ControindicationRepository;
 
 import plants.finalexam.model.Controindication;
 import plants.finalexam.model.Plant;
 
+@Service
 public class ControindicationService {
 
     @Autowired

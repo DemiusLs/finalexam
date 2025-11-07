@@ -73,7 +73,7 @@ public class PlantController {
 
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable Integer id, Model model){
-        model.addAttribute("plant", new Plant());
+        model.addAttribute("plant", plantService.getById(id));
         model.addAttribute("benefits", benefitService.findAll());
         model.addAttribute("controindications", controindicationService.findAll());
         model.addAttribute("family", familyService.findAll());
