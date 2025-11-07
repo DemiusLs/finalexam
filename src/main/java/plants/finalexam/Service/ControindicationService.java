@@ -10,7 +10,7 @@ import plants.finalexam.Repository.ControindicationRepository;
 import plants.finalexam.model.Controindication;
 import plants.finalexam.model.Plant;
 
-public class ControService {
+public class ControindicationService {
 
     @Autowired
     private ControindicationRepository controindicationRepo;
