@@ -46,7 +46,7 @@ public class PlantController {
     public String show(@PathVariable Integer id, Model model) {
         Plant plant = plantService.getById(id);
         model.addAttribute("plant", plant);
-        return new String();
+        return "plants/show";
     }
 
     @GetMapping("/create")
@@ -55,7 +55,7 @@ public class PlantController {
         model.addAttribute("benefits", benefitService.findAll());
         model.addAttribute("controindications", controindicationService.findAll());
         model.addAttribute("family", familyService.findAll());
-        return "/plants/create-or-edit";
+        return "plants/create-or-edit";
     }
     
     @PostMapping("/create")
@@ -78,7 +78,7 @@ public class PlantController {
         model.addAttribute("controindications", controindicationService.findAll());
         model.addAttribute("family", familyService.findAll());
         model.addAttribute("edit", true);
-        return "/plants/create-or-edit";
+        return "plants/create-or-edit";
         
     }
 
@@ -91,7 +91,7 @@ public class PlantController {
             model.addAttribute("controindications", controindicationService.findAll());
             model.addAttribute("family", familyService.findAll());
             model.addAttribute("edit", true);
-            return "/plants/create-or-edit";
+            return "plants/create-or-edit";
 
         }
         plantService.update(formPLant);

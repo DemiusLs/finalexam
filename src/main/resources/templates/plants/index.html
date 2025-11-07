@@ -14,7 +14,7 @@
         <th:block th:replace="~{fragments/fragments :: navigationBar}"></th:block> 
     </header> 
 
-    
+
     <main>
 
         <section>
@@ -27,19 +27,23 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">scientificName</th>
-                                    <th scope="col">commonName</th>
-                                    <th scope="col">imageUrl</th>
-                                    <th scope="col">toxic</th>
-                                    <th scope="col">benefits</th>
-                                    <th scope="col">controindications</th>
-                                    <th scope="col">family</th>
+                                    <th scope="col">Scientific Name</th>
+                                    <th scope="col">Common Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Habitat</th>
+                                    <th scope="col">ImageUrl</th>
+                                    <th scope="col">Toxic</th>
+                                    <th scope="col">Benefits</th>
+                                    <th scope="col">Controindications</th>
+                                    <th scope="col">Family</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr th:each="plant : ${plants}" th:object="${plant}">
                                     <td th:text="*{scientificName}"></td>
                                     <td th:text="*{commonName}"></td>
+                                    <td th:text="*{description}"></td>
+                                    <td th:text="*{habitat}"></td>
                                     <td th:text="*{imageUrl}"></td>
                                     <td th:text="*{toxic}"></td>
                                     <td th:text="*{benefits}"></td>

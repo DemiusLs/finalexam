@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -31,6 +32,9 @@ public class Plant {
     @NotBlank(message = "Family name cannot be blank,empty or null")
     
     private String imageUrl;
+    @Lob
+    private String description;
+    private String habitat;
     
     private boolean toxic = true;
 
@@ -121,6 +125,22 @@ public class Plant {
         this.family = family;
     }
 
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getHabitat() {
+        return this.habitat;
+    }
+
+    public void setHabitat(String habitat) {
+        this.habitat = habitat;
+    }
 
     
 }
