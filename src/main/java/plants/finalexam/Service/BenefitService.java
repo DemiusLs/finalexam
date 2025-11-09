@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import plants.finalexam.Repository.BenefitRepository;
+import plants.finalexam.Repository.PlantRepository;
 import plants.finalexam.model.Benefit;
 import plants.finalexam.model.Plant;
 
@@ -15,6 +16,9 @@ public class BenefitService {
     
     @Autowired
     private BenefitRepository benefitRepo;
+    @Autowired
+    private PlantRepository plantRepo;
+
 
     public List<Benefit> findAll(){
         return benefitRepo.findAll();
@@ -39,13 +43,14 @@ public class BenefitService {
     public void delete(Benefit benefit){
         for(Plant plant : benefit.getPlants()){
             plant.getBenefits().remove(benefit);
+            plantRepo.save(plant);
         }
         benefitRepo.delete(benefit);
     }
 
     public void deleteById(Integer id){
         Benefit benefit = getById(id);
-        benefitRepo.delete(benefit);
+        delete(benefit);
     }
 
 }

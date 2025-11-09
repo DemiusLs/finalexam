@@ -51,7 +51,7 @@ public class FamilyService {
 
     public void deleteById(Integer id){
         Family family = getById(id);
-        familyRepo.delete(family);
+        delete(family);
     }
     
 } 

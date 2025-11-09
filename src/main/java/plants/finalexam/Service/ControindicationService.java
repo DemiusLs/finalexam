@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import plants.finalexam.Repository.ControindicationRepository;
-
+import plants.finalexam.Repository.PlantRepository;
 import plants.finalexam.model.Controindication;
 import plants.finalexam.model.Plant;
 
@@ -16,6 +16,8 @@ public class ControindicationService {
 
     @Autowired
     private ControindicationRepository controindicationRepo;
+    @Autowired
+    private PlantRepository plantRepo;
     
     public List<Controindication> findAll(){
         return controindicationRepo.findAll();
@@ -40,12 +42,13 @@ public class ControindicationService {
     public void delete(Controindication controindication){
         for(Plant plant : controindication.getPlants()){
             plant.getControindications().remove(controindication);
+            plantRepo.save(plant); 
         }
         controindicationRepo.delete(controindication);
     }
 
     public void deleteById(Integer id){
         Controindication controindication = getById(id);
-        controindicationRepo.delete(controindication);
+        delete(controindication);
     }
 }

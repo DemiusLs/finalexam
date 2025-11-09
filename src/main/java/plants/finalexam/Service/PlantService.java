@@ -60,6 +60,6 @@ public class PlantService {
 
     public void deleteById(Integer id){
         Plant plant = getById(id);
-        plantRepo.delete(plant);
+        delete(plant);
     }
 }
