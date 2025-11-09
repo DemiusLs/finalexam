@@ -26,15 +26,15 @@ public class ControindicationController {
     @GetMapping("/index")
     public String index(Model model){
         List<Controindication> controindications = controindicationService.findAll();
-        model.addAttribute("controindication", controindications);
-        return "/index";
+        model.addAttribute("controindications", controindications);
+        return "/controindications/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model) {
         Controindication controindication= controindicationService.getById(id);
         model.addAttribute("controindication", controindication);
-        return new String();
+        return "/controindications/show";
     }
 
     @GetMapping("/create")

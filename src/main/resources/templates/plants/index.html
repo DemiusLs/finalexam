@@ -58,21 +58,21 @@
                                     <td th:text="*{controindications}"></td>
                                     <td th:text="*{family}"></td>
                                     <td>
-                                        <a th:href="@{/plants/{id}(id=${plant.id})}" class="btn btn-outline-info btn-sm">Details</a>
+                                        <a th:href="@{/plants/{id}(id=*{id})}" class="btn btn-outline-info btn-sm">Details</a>
                                     </td>
 
                                     <td>
-                                        <a th:href="@{/plants/{id}/edit (id=${plant.id})}" class="btn btn-outline-warning btn-sm">Edit</a>
+                                        <a th:href="@{/plants/{id}/edit (id=*{id})}" class="btn btn-outline-warning btn-sm">Edit</a>
                                     </td>
 
                                     <td >
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" th:data-bs-target="|#deleteModal${plant.id}|">
+                                        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" th:data-bs-target="|#deleteModal*{id}|">
                                         Delete
                                         </button>
 
                                         <!-- modal -->
-                                        <div class="modal fade" th:id="|deleteModal${plant.id}|" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal fade" th:id="|deleteModal*{id}|" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                             <div class="modal-header">
@@ -80,11 +80,11 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Are you really sure to delete <strong th:text="${plant.commonName}"></strong>
+                                                Are you really sure to delete <strong th:text="*{commonName}"></strong>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <form action="#" th:action="@{/plants/{id}/delete(id=${plant.id})}" method="post">
+                                                <form action="#" th:action="@{/plants/{id}/delete(id=*{id})}" method="post">
                                                 <button type="submit" class="btn btn-danger ">Delete</button>
                                             </form> 
                                             </div>

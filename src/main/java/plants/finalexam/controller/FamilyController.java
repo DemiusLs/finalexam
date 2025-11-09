@@ -29,14 +29,14 @@ public class FamilyController {
     public String index(Model model){
         List<Family> families = familyService.findAll();
         model.addAttribute("families", families);
-        return "/index";
+        return "/families/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model) {
         Family family= familyService.getById(id);
         model.addAttribute("family", family);
-        return new String();
+        return "/families/show";
     }
 
     @GetMapping("/create")

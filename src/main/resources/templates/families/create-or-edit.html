@@ -20,11 +20,11 @@
             <div class="container">
 
             
-                <h3 th:text="${edit} ? |Editing benefit : ${benefit.name} | :|Creating a new benefit|"></h3>    
+                <h3 th:text="${edit} ? |Editing family : ${family.name} | :|Creating a new family|"></h3>    
                 <div class="row">
                     <div class="col-12" >
                         
-                        <form id="plant-form" th:action="${edit} ? @{/benefits/{id}/edit (id=${benefit.id})} : @{/benefits/create}" method="post" th:object="${benefit}">
+                        <form id="plant-form" th:action="${edit} ? @{/families/{id}/edit (id=${family.id})} : @{/families/create}" method="post" th:object="${family}">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name:</label>
                                 <input type="text" class="form-control" id="name"  th:field="*{name}" th:errorClass="is-invalid">                                
@@ -47,7 +47,7 @@
 
                             
                            <div class="mb-3 d-flex justify-content-between">
-                                <button type="submit" class="btn btn-primary" value="create" th:text="${edit} ? |Update benefit| : |Create benefit|"></button>
+                                <button type="submit" class="btn btn-primary" value="create" th:text="${edit} ? |Update family| : |Create family|"></button>
                                 <button type="reset" class="btn btn-warning" value="reset">Reset all fields</button>
                            </div>
                             

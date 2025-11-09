@@ -21,15 +21,15 @@
             <div class="container">
 
             
-                <h3>Tabella dei benefici</h3>    
+                <h3>Tabella dei controindications</h3>    
                 <div class="row">
                     <div class="col-12">
                         <td>
-                            <a th:href="@{/benefits/create}" class="btn btn-outline-info btn-sm">Create new benefit</a>
+                            <a th:href="@{/controindications/create}" class="btn btn-outline-info btn-sm">Create new controindication</a>
                         </td>
                     </div>
 
-                    <div class="col-12" th:if="${benefits.size() > 0}">
+                    <div class="col-12" th:if="${controindications.size() > 0}">
                         <table class="table">
                             <thead>
                                 <tr>    
@@ -44,18 +44,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="benefit : ${benefits}" th:object="${benefit}">
+                                <tr th:each="controindication : ${controindications}" th:object="${controindication}">
                                     <td th:text="*{id}"></td>
                                     <td th:text="*{name}"></td>
                                     <td th:text="*{description}"></td>
                                     <td th:text="*{plants.size()}"></td>
                                     
                                     <td>
-                                        <a th:href="@{/benefits/{id}(id=*{id})}" class="btn btn-outline-info btn-sm">Details</a>
+                                        <a th:href="@{/controindications/{id}(id=*{id})}" class="btn btn-outline-info btn-sm">Details</a>
                                     </td>
 
                                     <td>
-                                        <a th:href="@{/benefits/{id}/edit (id=*{id})}" class="btn btn-outline-warning btn-sm">Edit</a>
+                                        <a th:href="@{/controindications/{id}/edit (id=*{id})}" class="btn btn-outline-warning btn-sm">Edit</a>
                                     </td>
 
                                     <td >
@@ -73,11 +73,11 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Are you really sure to delete <strong th:text="*{name}"></strong>
+                                                Are you really sure to delete <strong th:text="${controindication.name}"></strong>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <form action="#" th:action="@{/benefits/{id}/delete(id=*{id})}" method="post">
+                                                <form action="#" th:action="@{/controindications/{id}/delete(id=*{id})}" method="post">
                                                 <button type="submit" class="btn btn-danger ">Delete</button>
                                             </form> 
                                             </div>
@@ -92,7 +92,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-12" th:unless="${benefits.size() > 0}">
+                    <div class="col-12" th:unless="${controindications.size() > 0}">
                         <span>Non ci sono ancora elementi in tabella</span>
                     </div>
                     
