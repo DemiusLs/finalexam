@@ -54,7 +54,7 @@ public class PlantController {
         model.addAttribute("plant", new Plant());
         model.addAttribute("benefits", benefitService.findAll());
         model.addAttribute("controindications", controindicationService.findAll());
-        model.addAttribute("family", familyService.findAll());
+        model.addAttribute("families", familyService.findAll());
         return "plants/create-or-edit";
     }
     
@@ -64,7 +64,7 @@ public class PlantController {
         if(bindingResult.hasErrors()){
             model.addAttribute("benefits", benefitService.findAll());
             model.addAttribute("controindications", controindicationService.findAll());
-            model.addAttribute("family", familyService.findAll());
+            model.addAttribute("families", familyService.findAll());
             return "/plants/create-or-edit";
         }
         plantService.create(formPlant);
@@ -76,7 +76,7 @@ public class PlantController {
         model.addAttribute("plant", plantService.getById(id));
         model.addAttribute("benefits", benefitService.findAll());
         model.addAttribute("controindications", controindicationService.findAll());
-        model.addAttribute("family", familyService.findAll());
+        model.addAttribute("families", familyService.findAll());
         model.addAttribute("edit", true);
         return "plants/create-or-edit";
         
@@ -89,7 +89,7 @@ public class PlantController {
 
             model.addAttribute("benefits", benefitService.findAll());
             model.addAttribute("controindications", controindicationService.findAll());
-            model.addAttribute("family", familyService.findAll());
+            model.addAttribute("families", familyService.findAll());
             model.addAttribute("edit", true);
             return "plants/create-or-edit";
 

@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-12" >
                         
-                        <form id="plant-form" th:action="${edit} ? @{/plants/{id}/edit (id=${plant.id})} : @{/plants/create}" method="post" th:object="${plants}">
+                        <form id="plant-form" th:action="${edit} ? @{/plants/{id}/edit (id=${plant.id})} : @{/plants/create}" method="post" th:object="${plant}">
                             <div class="mb-3">
                                 <label for="commonName" class="form-label">Common Name:</label>
                                 <input type="text" class="form-control" id="commonName"  th:field="*{commonName}" th:errorClass="is-invalid">                                
@@ -57,7 +57,7 @@
 
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description:</label>
-                                <textarea rows="3" class="form-control" id="description" th:field="*{description}" th:errorClass="is-invalid">                                
+                                <textarea rows="3" class="form-control" id="description" th:field="*{description}" th:errorClass="is-invalid" ></textarea>                                
                                 <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
                                     <ul>
                                         <li th:each="err : ${#fields.errors('description')}" th:text="${err}" ></li>
@@ -78,8 +78,28 @@
 
 
                             <!-- Aggiungere i checkbox per Benefit e Controindications -->
-                             <!-- Aggiungere il select per la famiglia -->
+                             <div class="mb-3">
+                                <label class="form-label">Benefits</label>
+                                <div class="form-check form-check-inline" th:each="benefit :${benefits}" >
+                                    <input class="form-check-input" type="checkbox" th:id="|inlineCheckbox-${benefit.name}|" th:value="${benefit.id}" th:field="*{benefits}">
+                                    <label class="form-check-label" for="|inlineCheckbox-${benefit.name}|" th:text="${benefit.name}"></label>
+                                </div>
+                             </div>
 
+                             <div class="mb-3">
+                                <label class="form-label">Controindications</label>
+                                <div class="form-check form-check-inline" th:each="contro :${controindications}" >
+                                    <input class="form-check-input" type="checkbox" th:id="|inlineCheckbox-${contro.name}|" th:value="${contro.id}" th:field="*{controindications}">
+                                    <label class="form-check-label" for="|inlineCheckbox-${contro.name}|" th:text="${contro.name}"></label>
+                                </div>
+                             </div>
+                             <!-- Aggiungere il select per la famiglia -->
+                            <div class="mb-3">
+                                <label class="form-label">Plant family:</label>
+                                <select class="form-select" th:field="*{family}" >                                    
+                                    <option th:each="family :${families}" th:text="${family.name}" th:value="${family.id}"></option>              
+                                </select>
+                            </div>
 
                             
                            <div class="mb-3 d-flex justify-content-between">

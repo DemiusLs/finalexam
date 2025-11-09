@@ -21,58 +21,51 @@
             <div class="container">
 
             
-                <h3>Tabella delle piante</h3>    
+                <h3>Tabella dei benefici</h3>    
                 <div class="row">
                     <div class="col-12">
                         <td>
-                            <a th:href="@{/plants/create}" class="btn btn-outline-info btn-sm">Create new plant</a>
+                            <a th:href="@{/benefits/create}" class="btn btn-outline-info btn-sm">Create new benefit</a>
                         </td>
                     </div>
-                    <div class="col-12" th:if="${plants.size() > 0}">
+
+                    <div class="col-12" th:if="${benefits.size() > 0}">
                         <table class="table">
                             <thead>
-                                <tr>
-                                    <th scope="col">Scientific Name</th>
-                                    <th scope="col">Common Name</th>
+                                <tr>    
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
                                     <th scope="col">Description</th>
-                                    <th scope="col">Habitat</th>
-                                    <th scope="col">ImageUrl</th>
-                                    <th scope="col">Toxic</th>
-                                    <th scope="col">Benefits</th>
-                                    <th scope="col">Controindications</th>
-                                    <th scope="col">Family</th>
+                                    <th scope="col">Linked plants</th>                                    
                                     <th scope="col"></th>
                                     <th scope="col"></th>
-                                    <th scope="col"></th>                                    
+                                    <th scope="col"></th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="plant : ${plants}" th:object="${plant}">
-                                    <td th:text="*{scientificName}"></td>
-                                    <td th:text="*{commonName}"></td>
+                                <tr th:each="benefit : ${benefits}" th:object="${benefit}">
+                                    <td th:text="*{id}"></td>
+                                    <td th:text="*{name}"></td>
                                     <td th:text="*{description}"></td>
-                                    <td th:text="*{habitat}"></td>
-                                    <td th:text="*{imageUrl}"></td>
-                                    <td th:text="*{toxic}"></td>
-                                    <td th:text="*{benefits}"></td>
-                                    <td th:text="*{controindications}"></td>
-                                    <td th:text="*{family}"></td>
+                                    <td th:text="*{plants.size()}"></td>
+                                    
                                     <td>
-                                        <a th:href="@{/plants/{id}(id=${plant.id})}" class="btn btn-outline-info btn-sm">Details</a>
+                                        <a th:href="@{/benefits/{id}(id=${benefit.id})}" class="btn btn-outline-info btn-sm">Details</a>
                                     </td>
 
                                     <td>
-                                        <a th:href="@{/plants/{id}/edit (id=${plant.id})}" class="btn btn-outline-warning btn-sm">Edit</a>
+                                        <a th:href="@{/benefits/{id}/edit (id=${benefit.id})}" class="btn btn-outline-warning btn-sm">Edit</a>
                                     </td>
 
                                     <td >
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" th:data-bs-target="|#deleteModal${plant.id}|">
+                                        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" th:data-bs-target="|#deleteModal${benefit.id}|">
                                         Delete
                                         </button>
 
                                         <!-- modal -->
-                                        <div class="modal fade" th:id="|deleteModal${plant.id}|" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal fade" th:id="|deleteModal${benefit.id}|" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                             <div class="modal-header">
@@ -80,11 +73,11 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Are you really sure to delete <strong th:text="${plant.commonName}"></strong>
+                                                Are you really sure to delete <strong th:text="${benefit.name}"></strong>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <form action="#" th:action="@{/plants/{id}/delete(id=${plant.id})}" method="post">
+                                                <form action="#" th:action="@{/benefits/{id}/delete(id=${benefit.id})}" method="post">
                                                 <button type="submit" class="btn btn-danger ">Delete</button>
                                             </form> 
                                             </div>
@@ -99,7 +92,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-12" th:unless="${plants.size() > 0}">
+                    <div class="col-12" th:unless="${benefits.size() > 0}">
                         <span>Non ci sono ancora elementi in tabella</span>
                     </div>
                     

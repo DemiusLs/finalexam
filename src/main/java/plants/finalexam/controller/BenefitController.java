@@ -27,14 +27,14 @@ public class BenefitController {
     public String index(Model model){
         List<Benefit> benefits = benefitService.findAll();
         model.addAttribute("benefits", benefits);
-        return "/index";
+        return "/benefits/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model) {
         Benefit benefit= benefitService.getById(id);
         model.addAttribute("benefit", benefit);
-        return new String();
+        return "/benefits/show";
     }
 
     @GetMapping("/create")

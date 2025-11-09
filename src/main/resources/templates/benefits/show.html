@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+
+     <th:block th:replace="~{fragments/resources :: headTags}"></th:block>
+</head>
+<body>
+
+    <header>
+        <th:block th:replace="~{fragments/fragments :: navigationBar}"></th:block> 
+    </header>    
+
+    <main>
+        <section>
+            <div class="container" >
+
+            
+                <h3 th:text="|Dettagli ${benefit.name}|"></h3>                
+                       
+                <p th:text="${benefit.description}"></p>
+                
+                 <h3 th:text="|Tabella delle piante con proprietà ${benefit.name}|"></h3>    
+                <div class="row" >
+                    <div class="col-12" th:if="${benefit.plants.size() > 0}">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Scientific Name</th>
+                                    <th scope="col">Common Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Habitat</th>
+                                    <th scope="col">Toxic</th>
+                                    <th scope="col">Family</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="plant : ${benefit.plants}" th:object="${plant}">
+                                    <td th:text="*{scientificName}"></td>
+                                    <td th:text="*{commonName}"></td>
+                                    <td th:text="*{description}"></td>
+                                    <td th:text="*{habitat}"></td>
+                                    <td th:text="*{toxic}"></td>
+                                    <td th:text="*{benefits}"></td>
+                                    <td th:text="*{controindications}"></td>
+                                    <td th:text="*{family}"></td>
+                                    <td>
+                                        <a th:href="@{/plants/{id}(id=${plant.id})}" class="btn btn-outline-info btn-sm">Details</a>
+                                    </td>
+
+                                   
+                                
+                                </tr>
+                                
+                                
+                            </tbody>
+                        </table>   
+            </div>
+        </section>
+
+        
+
+    </main>
+    <footer>
+    </footer>
+
+     <th:block th:replace="~{fragments/resources :: scripts}"></th:block> 
+</body>
+</html>
