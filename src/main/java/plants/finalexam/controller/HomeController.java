@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
     
     @GetMapping
+    
     public String home(){
+        System.out.println("🏠 Entrato in HomeController.home()");
         return "home";
     }
 }
