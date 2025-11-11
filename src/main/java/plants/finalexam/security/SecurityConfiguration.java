@@ -17,28 +17,38 @@ public class SecurityConfiguration {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.authorizeHttpRequests(requests -> requests
+        http.csrf(csrf -> csrf
+        .ignoringRequestMatchers("/api/**"))
+        .cors(Customizer.withDefaults())
+        //gestione autorizzazioni
+        .authorizeHttpRequests(requests -> requests        
+        //per le rest API
+        .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+        .requestMatchers(HttpMethod.POST, "/api/**").hasAuthority("ADMIN")
+        .requestMatchers(HttpMethod.PUT, "/api/**").hasAuthority("ADMIN")
+        .requestMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("ADMIN")
+
+        //per le rotte interne
         .requestMatchers("/plants/create", "/plants/*/edit").hasAuthority("ADMIN")
         .requestMatchers(HttpMethod.POST , "/plants/**").hasAuthority("ADMIN")
-        .requestMatchers("/plant/index", "/plant/*").hasAnyAuthority("ADMIN", "USER")
+        .requestMatchers("/plant/index", "/plant/**").hasAnyAuthority("ADMIN", "USER")
 
         .requestMatchers("/benefits/create", "/benefits/*/edit").hasAuthority("ADMIN")
         .requestMatchers(HttpMethod.POST , "/benefits/**").hasAuthority("ADMIN")
-        .requestMatchers("/benefits/index", "/benefits/*").hasAnyAuthority("ADMIN", "USER")
+        .requestMatchers("/benefits/index", "/benefits/**").hasAnyAuthority("ADMIN", "USER")
 
         .requestMatchers("/controindications/create", "/controindications/*/edit").hasAuthority("ADMIN")
         .requestMatchers(HttpMethod.POST , "/controindications/**").hasAuthority("ADMIN")
-        .requestMatchers("/controindications/index", "/controindications/*").hasAnyAuthority("ADMIN", "USER")
+        .requestMatchers("/controindications/index", "/controindications/**").hasAnyAuthority("ADMIN", "USER")
 
         .requestMatchers("/families/create", "/families/*/edit").hasAuthority("ADMIN")
         .requestMatchers(HttpMethod.POST , "/families/**").hasAuthority("ADMIN")
-        .requestMatchers("/families/index", "/families/*").hasAnyAuthority("ADMIN", "USER")
+        .requestMatchers("/families/index", "/families/**").hasAnyAuthority("ADMIN", "USER")
 
         .requestMatchers("/**").permitAll())
-        .formLogin(Customizer.withDefaults())
-        .logout(logout -> logout.logoutSuccessUrl("/login"))
-        .csrf(csrf -> csrf
-        .ignoringRequestMatchers("/api/**"));
+        .formLogin(login -> login.defaultSuccessUrl("/", true))
+        .logout(logout -> logout.logoutSuccessUrl("/login"));
+        
         
 
         return http.build();
