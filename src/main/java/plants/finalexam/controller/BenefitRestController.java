@@ -1,0 +1,66 @@
+package plants.finalexam.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import plants.finalexam.Service.BenefitService;
+import plants.finalexam.model.Benefit;
+
+
+@RestController
+@RequestMapping("/api/benefits")
+public class BenefitRestController {
+    
+    @Autowired
+    private BenefitService benefitService;
+
+    @GetMapping
+    public ResponseEntity<List<Benefit>> index(){
+        return new ResponseEntity<>(benefitService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Benefit> show(@PathVariable Integer id){
+
+        Optional<Benefit> benefitAttempt = benefitService.findById(id);
+        if(benefitAttempt.isEmpty()){
+            return new ResponseEntity<Benefit>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<Benefit>(benefitAttempt.get(),HttpStatus.OK );
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<Benefit> store(@RequestBody Benefit benefit){
+        return new ResponseEntity<Benefit>(benefitService.create(benefit), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Benefit> update(@RequestBody Benefit benefit, @PathVariable Integer id){
+        if(benefitService.findById(id).isEmpty()){
+            return new ResponseEntity<Benefit>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Benefit>(benefitService.update(benefit) ,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Benefit> delete(@PathVariable Integer id){
+        if(benefitService.findById(id).isEmpty()){
+            return new ResponseEntity<Benefit>(HttpStatus.NOT_FOUND);
+        }
+        benefitService.deleteById(id);
+         return new ResponseEntity<Benefit>(HttpStatus.NO_CONTENT);
+    }
+}

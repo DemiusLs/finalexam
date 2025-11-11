@@ -36,7 +36,9 @@ public class SecurityConfiguration {
 
         .requestMatchers("/**").permitAll())
         .formLogin(Customizer.withDefaults())
-        .logout(logout -> logout.logoutSuccessUrl("/login"));
+        .logout(logout -> logout.logoutSuccessUrl("/login"))
+        .csrf(csrf -> csrf
+        .ignoringRequestMatchers("/api/**"));
         
 
         return http.build();

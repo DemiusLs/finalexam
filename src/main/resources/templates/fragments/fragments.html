@@ -38,6 +38,23 @@
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
+
+
+                        <div class="ms-2">
+                            <!-- Se l'utente è autenticato -->
+                            <div sec:authorize="isAuthenticated()">
+                                Logged as:<span class="ms-2 text-muted" sec:authentication="name" ></span>
+                                Role:<span class="ms-2 text-muted" sec:authentication="principal.authorities" ></span>
+                                <a class="btn btn-sm btn-outline-primary" href="/logout">Sign out</a>
+                            
+                            </div>
+
+                            <!-- Se l'utente NON è autenticato -->
+                            <div sec:authorize="!isAuthenticated()">
+                                <a class="btn btn-outline-primary" th:href="@{/login}">Login</a>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </nav>
