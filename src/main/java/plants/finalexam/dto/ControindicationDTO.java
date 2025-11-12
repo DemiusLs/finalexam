@@ -2,6 +2,9 @@ package plants.finalexam.dto;
 
 import java.util.List;
 
+import plants.finalexam.model.Benefit;
+import plants.finalexam.model.Controindication;
+
 public class ControindicationDTO {
     
     private Integer id;
@@ -14,6 +17,15 @@ public class ControindicationDTO {
         this.name = name;
         this.description = description;
         this.plants = plants;
+    }
+
+    public ControindicationDTO(Controindication controindication){
+        this.id = controindication.getId();
+        this.name = controindication.getName();
+        this.description = controindication.getDescription();
+        this.plants = controindication.getPlants().stream()
+        .map(p -> new PlantSummaryDTO(p))
+        .toList();
     }
 
 

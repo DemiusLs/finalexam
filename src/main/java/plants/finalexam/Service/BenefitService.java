@@ -5,9 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import plants.finalexam.Repository.BenefitRepository;
 import plants.finalexam.Repository.PlantRepository;
+import plants.finalexam.dto.BenefitDTO;
+import plants.finalexam.dto.PlantDTO;
 import plants.finalexam.model.Benefit;
 import plants.finalexam.model.Plant;
 
@@ -30,6 +33,12 @@ public class BenefitService {
 
     public Optional<Benefit> findById(Integer id){
         return benefitRepo.findById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<BenefitDTO> findBenefitDTOById(Integer id) {
+    return benefitRepo.findById(id)
+        .map(benefit -> new BenefitDTO(benefit));
     }
 
     public Benefit create(Benefit benefit){

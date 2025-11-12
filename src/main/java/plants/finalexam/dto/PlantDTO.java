@@ -2,6 +2,8 @@ package plants.finalexam.dto;
 
 import java.util.List;
 
+import plants.finalexam.model.Plant;
+
 public class PlantDTO {
     
     private Integer id;
@@ -30,6 +32,25 @@ public class PlantDTO {
         this.benefits = benefits;
         this.controindications = controindications;
      }
+     
+    public PlantDTO(Plant plant) {
+        this.id = plant.getId();
+        this.scientificName = plant.getScientificName();
+        this.commonName = plant.getCommonName();
+        this.imageUrl = plant.getImageUrl();
+        this.description = plant.getDescription();
+        this.habitat = plant.getHabitat();
+        this.toxic = plant.isToxic();
+        this.family = plant.getFamily() != null ? plant.getFamily().getName() : null;
+
+        this.benefits = plant.getBenefits().stream()
+            .map(b -> new BenefitSummaryDTO(b.getId(), b.getName(), b.getDescription()))
+            .toList();
+
+        this.controindications = plant.getControindications().stream()
+            .map(c -> new ControindicationSummaryDTO(c.getId(), c.getName(), c.getDescription()))
+            .toList();
+    }
 
 
 

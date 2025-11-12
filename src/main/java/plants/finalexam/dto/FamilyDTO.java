@@ -2,6 +2,8 @@ package plants.finalexam.dto;
 
 import java.util.List;
 
+import plants.finalexam.model.Family;
+
 public class FamilyDTO {
     private Integer id;
     private String name;
@@ -14,6 +16,16 @@ public class FamilyDTO {
         this.description = description;
         this.plants = plants;
     }
+
+    public FamilyDTO(Family family){
+        this.id = family.getId();
+        this.name = family.getName();
+        this.description = family.getDescription();
+        this.plants = family.getPlants().stream()
+        .map(p -> new PlantSummaryDTO(p))
+        .toList();
+    }
+
 
 
     public Integer getId() {

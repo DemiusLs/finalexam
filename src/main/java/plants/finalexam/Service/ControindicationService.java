@@ -5,9 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import plants.finalexam.Repository.ControindicationRepository;
 import plants.finalexam.Repository.PlantRepository;
+import plants.finalexam.dto.BenefitDTO;
+import plants.finalexam.dto.ControindicationDTO;
 import plants.finalexam.model.Controindication;
 import plants.finalexam.model.Plant;
 
@@ -29,6 +32,12 @@ public class ControindicationService {
 
     public Optional<Controindication> findById(Integer id){
         return controindicationRepo.findById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<ControindicationDTO> findControindicationDTOById(Integer id) {
+    return controindicationRepo.findById(id)
+        .map(controindication -> new ControindicationDTO(controindication));
     }
 
     public Controindication create(Controindication controindication){

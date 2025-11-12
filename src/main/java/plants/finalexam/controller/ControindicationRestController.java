@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import plants.finalexam.Service.ControindicationService;
+import plants.finalexam.dto.ControindicationDTO;
 import plants.finalexam.model.Controindication;
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -33,14 +34,14 @@ public class ControindicationRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Controindication> show(@PathVariable Integer id){
+    public ResponseEntity<ControindicationDTO> show(@PathVariable Integer id){
 
-        Optional<Controindication> controindicationAttempt = controindicationService.findById(id);
+        Optional<ControindicationDTO> controindicationAttempt = controindicationService.findControindicationDTOById(id);
         if(controindicationAttempt.isEmpty()){
-            return new ResponseEntity<Controindication>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<ControindicationDTO>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<Controindication>(controindicationAttempt.get(),HttpStatus.OK );
+        return new ResponseEntity<ControindicationDTO>(controindicationAttempt.get(),HttpStatus.OK );
     }
 
     @PostMapping("/create")

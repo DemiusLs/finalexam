@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import plants.finalexam.Service.PlantService;
+import plants.finalexam.dto.PlantDTO;
 import plants.finalexam.model.Plant;
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -33,12 +34,12 @@ public class PlantRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Plant> show(@PathVariable Integer id){
-        Optional<Plant> plantAttempt = plantService.findById(id);
+    public ResponseEntity<PlantDTO> show(@PathVariable Integer id){
+        Optional<PlantDTO> plantAttempt = plantService.findPlantDTOById(id);
         if(plantAttempt.isEmpty()){
-            return new ResponseEntity<Plant>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<PlantDTO>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Plant>(plantAttempt.get(), HttpStatus.OK);
+        return new ResponseEntity<PlantDTO>(plantAttempt.get(), HttpStatus.OK);
     }
 
     @PostMapping("/create")

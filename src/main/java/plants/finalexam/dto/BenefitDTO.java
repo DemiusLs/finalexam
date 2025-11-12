@@ -2,6 +2,8 @@ package plants.finalexam.dto;
 
 import java.util.List;
 
+import plants.finalexam.model.Benefit;
+
 public class BenefitDTO {
     private Integer id;
     private String name;
@@ -15,6 +17,14 @@ public class BenefitDTO {
         this.plants = plants;
     }
 
+    public BenefitDTO(Benefit benefit){
+        this.id = benefit.getId();
+        this.name = benefit.getName();
+        this.description = benefit.getDescription();
+        this.plants = benefit.getPlants().stream()
+        .map(p -> new PlantSummaryDTO(p))
+        .toList();
+    }
 
     public Integer getId() {
         return this.id;

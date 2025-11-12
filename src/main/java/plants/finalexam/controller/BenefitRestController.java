@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import plants.finalexam.Service.BenefitService;
+import plants.finalexam.dto.BenefitDTO;
 import plants.finalexam.model.Benefit;
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -33,14 +34,14 @@ public class BenefitRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Benefit> show(@PathVariable Integer id){
+    public ResponseEntity<BenefitDTO> show(@PathVariable Integer id){
 
-        Optional<Benefit> benefitAttempt = benefitService.findById(id);
+        Optional<BenefitDTO> benefitAttempt = benefitService.findBenefitDTOById(id);
         if(benefitAttempt.isEmpty()){
-            return new ResponseEntity<Benefit>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<BenefitDTO>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<Benefit>(benefitAttempt.get(),HttpStatus.OK );
+        return new ResponseEntity<BenefitDTO>(benefitAttempt.get(),HttpStatus.OK );
     }
 
     @PostMapping("/create")

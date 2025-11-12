@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import plants.finalexam.Service.FamilyService;
+import plants.finalexam.dto.FamilyDTO;
 import plants.finalexam.model.Family;
 
 
@@ -35,14 +36,14 @@ public class FamilyRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Family> show(@PathVariable Integer id){
+    public ResponseEntity<FamilyDTO> show(@PathVariable Integer id){
 
-        Optional<Family> familyAttempt = familyService.findById(id);
+        Optional<FamilyDTO> familyAttempt = familyService.findFamilyDTOById(id);
         if(familyAttempt.isEmpty()){
-            return new ResponseEntity<Family>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<FamilyDTO>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<Family>(familyAttempt.get(),HttpStatus.OK );
+        return new ResponseEntity<FamilyDTO>(familyAttempt.get(),HttpStatus.OK );
     }
 
     @PostMapping("/create")

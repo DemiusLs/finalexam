@@ -5,10 +5,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityNotFoundException;
 import plants.finalexam.Repository.BenefitRepository;
 import plants.finalexam.Repository.ControindicationRepository;
 import plants.finalexam.Repository.PlantRepository;
+import plants.finalexam.dto.PlantDTO;
 import plants.finalexam.model.Benefit;
 import plants.finalexam.model.Controindication;
 import plants.finalexam.model.Plant;
@@ -30,6 +33,13 @@ public class PlantService {
     public Plant getById(Integer id){
         return plantRepo.findById(id).get();
     }
+
+    @Transactional(readOnly = true)
+    public Optional<PlantDTO> findPlantDTOById(Integer id) {
+    return plantRepo.findById(id)
+        .map(plant -> new PlantDTO(plant));
+    }
+
 
     public Optional<Plant>findById(Integer id){
         return plantRepo.findById(id);

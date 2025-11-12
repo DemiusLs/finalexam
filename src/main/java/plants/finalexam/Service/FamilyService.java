@@ -6,9 +6,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import plants.finalexam.Repository.FamilyRepository;
 import plants.finalexam.Repository.PlantRepository;
+import plants.finalexam.dto.FamilyDTO;
 import plants.finalexam.model.Family;
 import plants.finalexam.model.Plant;
 
@@ -31,6 +33,12 @@ public class FamilyService {
 
     public Optional<Family> findById(Integer id){
         return familyRepo.findById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<FamilyDTO> findFamilyDTOById(Integer id) {
+    return familyRepo.findById(id)
+        .map(family -> new FamilyDTO(family));
     }
 
     public Family create(Family family){
