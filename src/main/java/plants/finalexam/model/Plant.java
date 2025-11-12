@@ -2,7 +2,7 @@ package plants.finalexam.model;
 
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -52,7 +52,7 @@ public class Plant {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "family_id")
-    @JsonBackReference
+    @JsonManagedReference
     private Family family;
 
 

@@ -20,6 +20,7 @@ public class SecurityConfiguration {
         http.csrf(csrf -> csrf
         .ignoringRequestMatchers("/api/**"))
         .cors(Customizer.withDefaults())
+        .httpBasic(Customizer.withDefaults())
         //gestione autorizzazioni
         .authorizeHttpRequests(requests -> requests        
         //per le rest API

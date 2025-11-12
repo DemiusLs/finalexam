@@ -2,7 +2,7 @@ package plants.finalexam.model;
 
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,7 +27,7 @@ public class Family {
     private String description;
 
     @OneToMany(mappedBy = "family",  fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonBackReference
     private Set<Plant> plants;
 
 
