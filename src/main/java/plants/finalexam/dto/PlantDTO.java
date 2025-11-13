@@ -37,7 +37,7 @@ public class PlantDTO {
         this.id = plant.getId();
         this.scientificName = plant.getScientificName();
         this.commonName = plant.getCommonName();
-        this.imageUrl = plant.getImageUrl();
+        this.imageUrl = "http://localhost:8080" + plant.getImageUrl();
         this.description = plant.getDescription();
         this.habitat = plant.getHabitat();
         this.toxic = plant.isToxic();

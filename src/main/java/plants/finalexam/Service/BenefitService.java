@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import plants.finalexam.Repository.BenefitRepository;
 import plants.finalexam.Repository.PlantRepository;
 import plants.finalexam.dto.BenefitDTO;
-import plants.finalexam.dto.PlantDTO;
 import plants.finalexam.model.Benefit;
 import plants.finalexam.model.Plant;
 

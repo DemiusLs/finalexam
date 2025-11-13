@@ -2,7 +2,6 @@ package plants.finalexam.dto;
 
 import java.util.List;
 
-import plants.finalexam.model.Benefit;
 import plants.finalexam.model.Controindication;
 
 public class ControindicationDTO {

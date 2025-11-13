@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.persistence.EntityNotFoundException;
 import plants.finalexam.Repository.BenefitRepository;
 import plants.finalexam.Repository.ControindicationRepository;
 import plants.finalexam.Repository.PlantRepository;

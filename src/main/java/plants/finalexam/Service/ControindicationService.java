@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import plants.finalexam.Repository.ControindicationRepository;
 import plants.finalexam.Repository.PlantRepository;
-import plants.finalexam.dto.BenefitDTO;
 import plants.finalexam.dto.ControindicationDTO;
 import plants.finalexam.model.Controindication;
 import plants.finalexam.model.Plant;
