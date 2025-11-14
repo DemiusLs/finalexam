@@ -18,6 +18,44 @@
     <th:block th:fragment="scripts">
         <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
     </th:block>
+
+    <th:block th:fragment="scriptView">
+      <script>
+        const VIEW_KEY = 'plantsViewMode';
+
+            function applyView(mode) {
+            const tableView = document.getElementById('tableView');
+            const cardView  = document.getElementById('cardView');
+            const switchEl  = document.getElementById('viewSwitch');
+
+            if (mode === 'card') {
+                tableView.classList.add('d-none');
+                cardView.classList.remove('d-none');
+                switchEl.checked = true;
+            } else {
+                // default: table
+                cardView.classList.add('d-none');
+                tableView.classList.remove('d-none');
+                switchEl.checked = false;
+            }
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+            // leggo la preferenza salvata (se non c'è → 'table')
+            const savedMode = localStorage.getItem(VIEW_KEY) || 'table';
+            applyView(savedMode);
+
+            const switchEl = document.getElementById('viewSwitch');
+
+            // quando l'utente cambia vista, salvo la scelta e applico
+            switchEl.addEventListener('change', function () {
+                const mode = this.checked ? 'card' : 'table';
+                localStorage.setItem(VIEW_KEY, mode);
+                applyView(mode);
+            });
+            });
+        </script>
+    </th:block>
     
 </body> 
 </html>

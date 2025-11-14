@@ -71,4 +71,24 @@ public class PlantService {
         Plant plant = getById(id);
         delete(plant);
     }
+
+    public List<Plant> searchAndSort(String search , String sortDir){
+        boolean hasSearch = search != null && !search.isBlank();
+
+        if(hasSearch){
+            if(sortDir.equalsIgnoreCase("desc")){
+                return plantRepo.findByCommonNameContainingIgnoreCaseOrScientificNameContainingIgnoreCaseOrderByCommonNameDesc(search, search);
+            }else{
+                return plantRepo.findByCommonNameContainingIgnoreCaseOrScientificNameContainingIgnoreCaseOrderByCommonNameAsc(search, search);
+            }
+        }else{
+            if(sortDir.equalsIgnoreCase("desc")){
+                return plantRepo.findAllByOrderByCommonNameDesc();
+            }else{
+                return plantRepo.findAllByOrderByCommonNameAsc();
+            }
+               
+        }
+
+    }
 }

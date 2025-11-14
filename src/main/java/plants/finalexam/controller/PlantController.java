@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 import plants.finalexam.Service.BenefitService;
@@ -35,9 +36,11 @@ public class PlantController {
     private FamilyService familyService;
     
     @GetMapping("/index")
-    public String index(Model model){
-        List<Plant> plants = plantService.findAll();
+    public String index(Model model, @RequestParam(name = "sort", required = false , defaultValue = "asc") String sort, @RequestParam(name = "search" , required = false) String search){
+        List<Plant> plants = plantService.searchAndSort(search,sort);
         model.addAttribute("plants",plants);
+        model.addAttribute("search" , search);
+        model.addAttribute("sort" , sort);
         return "/plants/index";
     }
 

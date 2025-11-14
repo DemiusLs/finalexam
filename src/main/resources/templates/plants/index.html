@@ -18,93 +18,156 @@
     <main>
 
         <section>
-            <div class="container">
+            <div class="container">            
+                <h3 class="mb-3">Tabella delle piante</h3>
 
-            
-                <h3>Tabella delle piante</h3>    
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col-12">
+                        <form method="get" class="row g-2 align-items-end">
+
+                            <div class="col-sm-6 col-md-4">
+                                <label class="form-label mb-1">Cerca per nome</label>
+                                <input type="text"
+                                    name="search"
+                                    class="form-control"
+                                    placeholder="Cerca per nome..."
+                                    th:value="${search}">
+                            </div>
+
+                            <div class="col-sm-4 col-md-3">
+                                <label class="form-label mb-1">Ordina per nome</label>
+                                <select name="sort"
+                                        class="form-select"
+                                        onchange="this.form.submit()">
+
+                                    <option value="asc"  th:selected="${sort == 'asc'}">A → Z</option>
+                                    <option value="desc" th:selected="${sort == 'desc'}">Z → A</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-2 col-md-2">
+                                <button class="btn btn-primary w-100" type="submit">Filtra</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-6">
                         <td>
                             <a th:href="@{/plants/create}" class="btn btn-outline-info btn-sm">Create new plant</a>
                         </td>
                     </div>
-                    <div class="col-12" th:if="${plants.size() > 0}">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Scientific Name</th>
-                                    <th scope="col">Common Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Habitat</th>
-                                    <th scope="col">ImageUrl</th>
-                                    <th scope="col">Toxic</th>
-                                    <th scope="col">Benefits</th>
-                                    <th scope="col">Controindications</th>
-                                    <th scope="col">Family</th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="plant : ${plants}" th:object="${plant}">
-                                    <td th:text="*{scientificName}"></td>
-                                    <td th:text="*{commonName}"></td>
-                                    <td th:text="*{description}"></td>
-                                    <td th:text="*{habitat}"></td>
-                                    <td th:text="*{imageUrl}"></td>
-                                    <td th:text="*{toxic}"></td>
-                                    <td th:text="*{benefits}"></td>
-                                    <td th:text="*{controindications}"></td>
-                                    <td th:text="*{family}"></td>
-                                    <td>
-                                        <a th:href="@{/plants/{id}(id=*{id})}" class="btn btn-outline-info btn-sm">Details</a>
-                                    </td>
-
-                                    <td>
-                                        <a th:href="@{/plants/{id}/edit (id=*{id})}" class="btn btn-outline-warning btn-sm">Edit</a>
-                                    </td>
-
-                                    <td >
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" th:data-bs-target="|#deleteModal*{id}|">
-                                        Delete
-                                        </button>
-
-                                        <!-- modal -->
-                                        <div class="modal fade" th:id="|deleteModal*{id}|" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="deleteModalLabel">Conferme delete</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you really sure to delete <strong th:text="*{commonName}"></strong>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <form action="#" th:action="@{/plants/{id}/delete(id=*{id})}" method="post">
-                                                <button type="submit" class="btn btn-danger ">Delete</button>
-                                            </form> 
-                                            </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        </td>
-                                
-                                </tr>
-                                
-                                
-                            </tbody>
-                        </table>
+                    <div class="col-6">
+                        <label class="me-2">Vista Card</label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="viewSwitch">
+                        </div>
                     </div>
-                    <div class="col-12" th:unless="${plants.size() > 0}">
-                        <span>Non ci sono ancora elementi in tabella</span>
+                </div>
+
+                <div id="tableView">
+                            <div class="col-12" th:if="${plants.size() > 0}">
+                                <div class="table-responsive">
+                                        <table class="table table-striped align-middle">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">id</th>
+                                                    <th scope="col">Scientific Name</th>
+                                                    <th scope="col">Common Name</th>
+                                                    <th class="d-none d-xl-table-cell" scope="col">Description</th>
+                                                    <th class="d-none d-lg-table-cell" scope="col">Habitat</th>
+                                                    <!-- <th scope="col">ImageUrl</th>  -->
+                                                    <th class="d-none d-lg-table-cell" scope="col">Toxic</th>
+                                                    <th class="d-none d-xl-table-cell" scope="col">Benefits</th>
+                                                    <th class="d-none d-xl-table-cell" scope="col">Controindications</th>
+                                                    <th class="d-none d-lg-table-cell" scope="col">Family</th>
+                                                    <th  scope="col"></th>
+                                                    <th  scope="col"></th>
+                                                    <th  scope="col"></th>                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="plant : ${plants}" th:object="${plant}">
+                                                    <td  th:text="*{id}"></td>
+                                                    <td th:text="*{scientificName}"></td>
+                                                    <td th:text="*{commonName}"></td>
+                                                    <td class="d-none d-xl-table-cell" th:text="*{description}"></td>
+                                                    <td class="d-none d-lg-table-cell" th:text="*{habitat}"></td>
+                                                    <!-- <td th:text="*{imageUrl}"></td>  -->
+                                                    <td class="d-none d-lg-table-cell" th:text="*{toxic}"></td>
+                                                    <td class="d-none d-xl-table-cell" th:text="*{benefits}"></td>
+                                                    <td class="d-none d-xl-table-cell" th:text="*{controindications}"></td>
+                                                    <td class="d-none d-lg-table-cell" th:text="*{family}"></td>
+                                                    <td>
+                                                        <a th:href="@{/plants/{id}(id=*{id})}" class="btn btn-outline-info btn-sm">Details</a>
+                                                    </td>
+
+                                                    <td>
+                                                        <a th:href="@{/plants/{id}/edit (id=*{id})}" class="btn btn-outline-warning btn-sm">Edit</a>
+                                                    </td>
+
+                                                    <td >
+                                                        <!-- Button trigger modal -->
+                                                        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" th:data-bs-target="|#deleteModal*{id}|">
+                                                        Delete
+                                                        </button>
+
+                                                        <!-- modal -->
+                                                        <div class="modal fade" th:id="|deleteModal*{id}|" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="deleteModalLabel">Conferme delete</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Are you really sure to delete <strong th:text="*{commonName}"></strong>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        <form action="#" th:action="@{/plants/{id}/delete(id=*{id})}" method="post">
+                                                                            <button type="submit" class="btn btn-danger ">Delete</button>
+                                                                        </form> 
+                                                                </div>
+                                                            
+                                                            </div>
+                                                        </div>
+                                                    </td>                                                
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                        </div>
+                        <div class="col-12" th:unless="${plants.size() > 0}">
+                            <span>Non ci sono ancora elementi in tabella</span>
+                        </div>
                     </div>
                     
-                </div>
+
+                    
+                    
                 
+                
+                    <div id="cardView" class="d-none">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
+                            <div class="col" th:each="plant : ${plants}">
+                                <a th:href="@{/plants/{id}(id=${plant.id})}" class="text-decoration-none text-dark">
+                                    <div class="card shadow-sm border-0 h-100">
+                                        <img th:src="${plant.imageUrl}"
+                                            class="card-img-top"
+                                            style="height: 220px; object-fit: cover;">
+
+                                        <div class="card-body">
+                                            <h5 class="fw-bold" th:text="${plant.commonName}"></h5>
+                                            <p class="text-muted fst-italic" th:text="${plant.scientificName}"></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
             
             
 
@@ -122,6 +185,7 @@
 
     </footer>
 
-     <th:block th:replace="~{fragments/resources :: scripts}"></th:block> 
+     <th:block th:replace="~{fragments/resources :: scripts}"></th:block>
+     <th:block th:replace="~{fragments/resources :: scriptView}"></th:block>  
 </body>
 </html>
