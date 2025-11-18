@@ -2,6 +2,7 @@ package plants.finalexam.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,12 +34,6 @@ public class ControindicationService {
         return controindicationRepo.findById(id);
     }
 
-    @Transactional(readOnly = true)
-    public Optional<ControindicationDTO> findControindicationDTOById(Integer id) {
-    return controindicationRepo.findById(id)
-        .map(controindication -> new ControindicationDTO(controindication));
-    }
-
     public Controindication create(Controindication controindication){
         return controindicationRepo.save(controindication);
     }
@@ -58,5 +53,17 @@ public class ControindicationService {
     public void deleteById(Integer id){
         Controindication controindication = getById(id);
         delete(controindication);
+    }
+
+     //DTO
+    @Transactional(readOnly = true)
+    public Optional<ControindicationDTO> findControindicationDTOById(Integer id) {
+    return controindicationRepo.findById(id)
+        .map(controindication -> new ControindicationDTO(controindication));
+    }
+
+    public List<ControindicationDTO> findAllFamilyDTO(){
+        List <Controindication> controindications = findAll();
+       return controindications.stream().map(controindication -> new ControindicationDTO(controindication)).collect(Collectors.toList());
     }
 }

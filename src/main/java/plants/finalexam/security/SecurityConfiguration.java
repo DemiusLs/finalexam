@@ -22,7 +22,8 @@ public class SecurityConfiguration {
         .cors(Customizer.withDefaults())
         .httpBasic(Customizer.withDefaults())
         //gestione autorizzazioni
-        .authorizeHttpRequests(requests -> requests        
+        .authorizeHttpRequests(requests -> requests 
+               
         //per le rest API
         .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/**").hasAuthority("ADMIN")
@@ -32,7 +33,7 @@ public class SecurityConfiguration {
         //per le rotte interne
         .requestMatchers("/plants/create", "/plants/*/edit").hasAuthority("ADMIN")
         .requestMatchers(HttpMethod.POST , "/plants/**").hasAuthority("ADMIN")
-        .requestMatchers("/plant/index", "/plant/**").hasAnyAuthority("ADMIN", "USER")
+        .requestMatchers("/plants/index", "/plants/**").hasAnyAuthority("ADMIN", "USER")
 
         .requestMatchers("/benefits/create", "/benefits/*/edit").hasAuthority("ADMIN")
         .requestMatchers(HttpMethod.POST , "/benefits/**").hasAuthority("ADMIN")
@@ -46,8 +47,9 @@ public class SecurityConfiguration {
         .requestMatchers(HttpMethod.POST , "/families/**").hasAuthority("ADMIN")
         .requestMatchers("/families/index", "/families/**").hasAnyAuthority("ADMIN", "USER")
 
-        .requestMatchers("/**").permitAll())
-        .formLogin(login -> login.defaultSuccessUrl("/", true))
+        
+        .anyRequest().authenticated())
+        .formLogin(login -> login.defaultSuccessUrl("/plants/index", true))
         .logout(logout -> logout.logoutSuccessUrl("/login"));
         
         

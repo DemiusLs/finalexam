@@ -2,6 +2,7 @@ package plants.finalexam.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,12 +35,6 @@ public class BenefitService {
         return benefitRepo.findById(id);
     }
 
-    @Transactional(readOnly = true)
-    public Optional<BenefitDTO> findBenefitDTOById(Integer id) {
-    return benefitRepo.findById(id)
-        .map(benefit -> new BenefitDTO(benefit));
-    }
-
     public Benefit create(Benefit benefit){
         return benefitRepo.save(benefit);
     }
@@ -60,5 +55,17 @@ public class BenefitService {
         Benefit benefit = getById(id);
         delete(benefit);
     }
+
+    @Transactional(readOnly = true)
+    public Optional<BenefitDTO> findBenefitDTOById(Integer id) {
+    return benefitRepo.findById(id)
+        .map(benefit -> new BenefitDTO(benefit));
+    }
+
+    public List<BenefitDTO> findAllFamilyDTO(){
+        List <Benefit> benefits = findAll();
+       return benefits.stream().map(benefit -> new BenefitDTO(benefit)).collect(Collectors.toList());
+    }
+
 
 }

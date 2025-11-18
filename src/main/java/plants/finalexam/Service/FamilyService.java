@@ -3,6 +3,7 @@ package plants.finalexam.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,12 +36,6 @@ public class FamilyService {
         return familyRepo.findById(id);
     }
 
-    @Transactional(readOnly = true)
-    public Optional<FamilyDTO> findFamilyDTOById(Integer id) {
-    return familyRepo.findById(id)
-        .map(family -> new FamilyDTO(family));
-    }
-
     public Family create(Family family){
         return familyRepo.save(family);
     }
@@ -61,5 +56,20 @@ public class FamilyService {
         Family family = getById(id);
         delete(family);
     }
+
+     //DTO
+    @Transactional(readOnly = true)
+    public Optional<FamilyDTO> findFamilyDTOById(Integer id) {
+    return familyRepo.findById(id)
+        .map(family -> new FamilyDTO(family));
+    }
+
+    public List<FamilyDTO> findAllFamilyDTO(){
+        List <Family> families = findAll();
+       return families.stream().map(family -> new FamilyDTO(family)).collect(Collectors.toList());
+    }
+
+    
+
     
 } 

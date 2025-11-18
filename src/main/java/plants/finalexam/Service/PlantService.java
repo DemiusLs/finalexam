@@ -2,6 +2,7 @@ package plants.finalexam.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,13 +33,6 @@ public class PlantService {
     public Plant getById(Integer id){
         return plantRepo.findById(id).get();
     }
-
-    @Transactional(readOnly = true)
-    public Optional<PlantDTO> findPlantDTOById(Integer id) {
-    return plantRepo.findById(id)
-        .map(plant -> new PlantDTO(plant));
-    }
-
 
     public Optional<Plant>findById(Integer id){
         return plantRepo.findById(id);
@@ -91,4 +85,26 @@ public class PlantService {
         }
 
     }
+
+
+    //DTO
+    @Transactional(readOnly = true)
+    public Optional<PlantDTO> findPlantDTOById(Integer id) {
+        return plantRepo.findById(id)
+            .map(plant -> new PlantDTO(plant));
+    }
+
+    public List<PlantDTO> findAllPlantDTO(){
+        List <Plant> plants = findAll();
+       return plants.stream().map(plant -> new PlantDTO(plant)).collect(Collectors.toList());
+    }
+
+    public List<PlantDTO> searchAndSortDTO(String search, String sortDir) {
+    
+    List<Plant> plants = searchAndSort(search, sortDir);
+        return plants.stream()
+            .map(plant -> new PlantDTO(plant)) 
+            .collect(Collectors.toList());
+    }
+
 }
