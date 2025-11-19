@@ -62,7 +62,7 @@ public class BenefitService {
         .map(benefit -> new BenefitDTO(benefit));
     }
 
-    public List<BenefitDTO> findAllFamilyDTO(){
+    public List<BenefitDTO> findAllBenefitDTO(){
         List <Benefit> benefits = findAll();
        return benefits.stream().map(benefit -> new BenefitDTO(benefit)).collect(Collectors.toList());
     }

@@ -30,7 +30,7 @@ public class PlantRestController {
     
     @GetMapping
     public ResponseEntity<List<PlantDTO>> index(){
-        return new ResponseEntity<>(plantService.findAllPlantDTO(), HttpStatus.OK);
+        return new ResponseEntity<>(plantService.findAllPlantsDTO(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

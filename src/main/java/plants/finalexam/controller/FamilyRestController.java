@@ -31,8 +31,8 @@ public class FamilyRestController {
     private FamilyService familyService;
 
     @GetMapping
-    public ResponseEntity<List<Family>> index(){
-        return new ResponseEntity<>(familyService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<FamilyDTO>> index(){
+        return new ResponseEntity<>(familyService.findAllFamilyDTO(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

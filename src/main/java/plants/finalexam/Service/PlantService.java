@@ -94,7 +94,7 @@ public class PlantService {
             .map(plant -> new PlantDTO(plant));
     }
 
-    public List<PlantDTO> findAllPlantDTO(){
+    public List<PlantDTO> findAllPlantsDTO(){
         List <Plant> plants = findAll();
        return plants.stream().map(plant -> new PlantDTO(plant)).collect(Collectors.toList());
     }

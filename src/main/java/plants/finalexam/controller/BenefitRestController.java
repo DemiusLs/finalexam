@@ -29,8 +29,8 @@ public class BenefitRestController {
     private BenefitService benefitService;
 
     @GetMapping
-    public ResponseEntity<List<Benefit>> index(){
-        return new ResponseEntity<>(benefitService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<BenefitDTO>> index(){
+        return new ResponseEntity<>(benefitService.findAllBenefitDTO(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

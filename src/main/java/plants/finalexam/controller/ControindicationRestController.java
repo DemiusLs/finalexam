@@ -29,8 +29,8 @@ public class ControindicationRestController {
     private ControindicationService controindicationService;
 
     @GetMapping
-    public ResponseEntity<List<Controindication>> index(){
-        return new ResponseEntity<>(controindicationService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<ControindicationDTO>> index(){
+        return new ResponseEntity<>(controindicationService.findAllControindicationDTO(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

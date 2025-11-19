@@ -62,7 +62,7 @@ public class ControindicationService {
         .map(controindication -> new ControindicationDTO(controindication));
     }
 
-    public List<ControindicationDTO> findAllFamilyDTO(){
+    public List<ControindicationDTO> findAllControindicationDTO(){
         List <Controindication> controindications = findAll();
        return controindications.stream().map(controindication -> new ControindicationDTO(controindication)).collect(Collectors.toList());
     }
