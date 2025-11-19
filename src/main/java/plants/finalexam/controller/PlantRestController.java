@@ -29,8 +29,8 @@ public class PlantRestController {
     private PlantService plantService;
     
     @GetMapping
-    public ResponseEntity<List<Plant>> index(){
-        return new ResponseEntity<>(plantService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<PlantDTO>> index(){
+        return new ResponseEntity<>(plantService.findAllPlantDTO(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

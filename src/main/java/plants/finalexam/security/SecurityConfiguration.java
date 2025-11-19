@@ -23,7 +23,9 @@ public class SecurityConfiguration {
         .httpBasic(Customizer.withDefaults())
         //gestione autorizzazioni
         .authorizeHttpRequests(requests -> requests 
-               
+
+        .requestMatchers("/images/**").permitAll()
+        .requestMatchers("/", "/login").permitAll()       
         //per le rest API
         .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/**").hasAuthority("ADMIN")
