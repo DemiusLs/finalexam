@@ -24,14 +24,13 @@ public class SecurityConfiguration {
         //gestione autorizzazioni
         .authorizeHttpRequests(requests -> requests 
 
-        .requestMatchers("/images/**").permitAll()
-        .requestMatchers("/", "/login").permitAll()       
+        .requestMatchers("/images/**").permitAll()      
         //per le rest API
-        .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/**").hasAuthority("ADMIN")
         .requestMatchers(HttpMethod.PUT, "/api/**").hasAuthority("ADMIN")
         .requestMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("ADMIN")
-
+        .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+        
         //per le rotte interne
         .requestMatchers("/plants/create", "/plants/*/edit").hasAuthority("ADMIN")
         .requestMatchers(HttpMethod.POST , "/plants/**").hasAuthority("ADMIN")

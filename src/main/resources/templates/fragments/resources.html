@@ -16,24 +16,16 @@
             const VIEW_KEY = 'plantsViewMode';
 
             (function () {
-            // 1) Vista iniziale dalla memoria
             var mode = localStorage.getItem(VIEW_KEY) || 'table';
             var css;
-
             if (mode === 'card') {
-                // nascondo la tabella
                 css = '#tableView { display: none; }';
             } else {
-                // nascondo le card
                 css = '#cardView { display: none; }';
             }
-
-            // inietto lo stile nell'head
             var style = document.createElement('style');
             style.textContent = css;
             document.head.appendChild(style);
-
-            // 2) Quando il DOM è pronto, attacco lo switch
             window.addEventListener('DOMContentLoaded', function () {
                 var tableView = document.getElementById('tableView');
                 var cardView  = document.getElementById('cardView');
