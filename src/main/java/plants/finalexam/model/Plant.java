@@ -29,8 +29,7 @@ public class Plant {
     private String scientificName ;
     @NotBlank(message = "Common name cannot be blank,empty or null")
     private String commonName;
-    @NotBlank(message = "Family name cannot be blank,empty or null")
-    
+    @NotBlank(message = "Family name cannot be blank,empty or null")    
     private String imageUrl;
     @Lob
     private String description;

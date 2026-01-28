@@ -39,8 +39,7 @@
                                     <th scope="col">Linked plants</th>                                    
                                     <th scope="col"></th>
                                     <th scope="col" sec:authorize="hasAuthority('ADMIN')"></th>
-                                    <th scope="col" sec:authorize="hasAuthority('ADMIN')"></th>
-                                    
+                                    <th scope="col" sec:authorize="hasAuthority('ADMIN')"></th>                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,23 +47,17 @@
                                     <td th:text="*{id}"></td>
                                     <td th:text="*{name}"></td>
                                     <td th:text="*{description}"></td>
-                                    <td th:text="*{plants.size()}"></td>
-                                    
+                                    <td th:text="*{plants.size()}"></td>                                    
                                     <td>
                                         <a th:href="@{/benefits/{id}(id=*{id})}" class="btn btn-outline-info btn-sm">Details</a>
                                     </td>
-
                                     <td sec:authorize="hasAuthority('ADMIN')"> 
                                         <a th:href="@{/benefits/{id}/edit (id=*{id})}" class="btn btn-outline-warning btn-sm">Edit</a>
                                     </td>
-
                                     <td sec:authorize="hasAuthority('ADMIN')">
-                                        <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" th:data-bs-target="|#deleteModal*{id}|">
                                         Delete
                                         </button>
-
-                                        <!-- modal -->
                                         <div class="modal fade" th:id="|deleteModal*{id}|" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -84,33 +77,18 @@
                                             </div>
                                         </div>
                                         </div>
-                                        </td>
-                                
-                                </tr>
-                                
-                                
+                                        </td>                                
+                                </tr>                                                           
                             </tbody>
                         </table>
                     </div>
                     <div class="col-12" th:unless="${benefits.size() > 0}">
                         <span>Non ci sono ancora elementi in tabella</span>
                     </div>
-                    
                 </div>
-                
-            
-            
-
             </div>
-
-
-            
         </section>
-        
-        
-
     </main>
-
     <footer>
 
     </footer>

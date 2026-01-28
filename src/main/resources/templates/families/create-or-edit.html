@@ -15,11 +15,8 @@
     </header> 
 
     <main>
-
         <section>
             <div class="container">
-
-            
                 <h3 th:text="${edit} ? |Editing family : ${family.name} | :|Creating a new family|"></h3>    
                 <div class="row">
                     <div class="col-12" >
@@ -34,7 +31,6 @@
                                     </ul>
                                 </div>
                             </div>
-
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description:</label>
                                 <textarea rows="3" class="form-control" id="description" th:field="*{description}" th:errorClass="is-invalid" ></textarea>                                
@@ -44,8 +40,6 @@
                                     </ul>
                                 </div>
                             </div>
-
-                            
                            <div class="mb-3 d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary" value="create" th:text="${edit} ? |Update family| : |Create family|"></button>
                                 <button type="reset" class="btn btn-warning" value="reset">Reset all fields</button>
@@ -54,22 +48,11 @@
                         </form>
                     </div>
                 </div>
-                
-            
-            
-
             </div>
-
-
-            
         </section>
-        
-        
-
     </main>
 
     <footer>
-
     </footer>
 
     <th:block th:replace="~{fragments/resources :: scripts}"></th:block> 
