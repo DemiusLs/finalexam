@@ -1,9 +1,9 @@
 
 package plants.finalexam.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,13 +60,21 @@ public class FamilyService {
      //DTO
     @Transactional(readOnly = true)
     public Optional<FamilyDTO> findFamilyDTOById(Integer id) {
-    return familyRepo.findById(id)
-        .map(family -> new FamilyDTO(family));
+        Optional<Family> family = familyRepo.findById(id);
+        if(family.isPresent()){
+            return Optional.of(new FamilyDTO(family.get()));
+        }else{
+            return Optional.empty();
+        }
     }
 
     public List<FamilyDTO> findAllFamilyDTO(){
         List <Family> families = findAll();
-       return families.stream().map(family -> new FamilyDTO(family)).collect(Collectors.toList());
+        List<FamilyDTO> familiesDTOs = new ArrayList<>();
+        for(Family f : families){
+            familiesDTOs.add(new FamilyDTO(f));
+        }
+        return familiesDTOs;
     }
 
     

@@ -1,8 +1,8 @@
 package plants.finalexam.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,12 +58,20 @@ public class ControindicationService {
      //DTO
     @Transactional(readOnly = true)
     public Optional<ControindicationDTO> findControindicationDTOById(Integer id) {
-    return controindicationRepo.findById(id)
-        .map(controindication -> new ControindicationDTO(controindication));
+        Optional<Controindication> controindication = controindicationRepo.findById(id);
+        if(controindication.isPresent()){
+            return Optional.of(new ControindicationDTO(controindication.get()));
+        }else{
+            return Optional.empty();
+        }
     }
 
     public List<ControindicationDTO> findAllControindicationDTO(){
         List <Controindication> controindications = findAll();
-       return controindications.stream().map(controindication -> new ControindicationDTO(controindication)).collect(Collectors.toList());
+        List<ControindicationDTO> controindicationDTOs = new ArrayList<>();
+        for(Controindication c : controindications){
+            controindicationDTOs.add(new ControindicationDTO(c));
+        }
+        return controindicationDTOs;
     }
 }

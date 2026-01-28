@@ -1,8 +1,8 @@
 package plants.finalexam.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,13 +58,21 @@ public class BenefitService {
 
     @Transactional(readOnly = true)
     public Optional<BenefitDTO> findBenefitDTOById(Integer id) {
-    return benefitRepo.findById(id)
-        .map(benefit -> new BenefitDTO(benefit));
+        Optional<Benefit> benefit = benefitRepo.findById(id);
+        if(benefit.isPresent()){
+            return Optional.of(new BenefitDTO(benefit.get()));
+        }else{
+            return Optional.empty();
+        }
     }
 
     public List<BenefitDTO> findAllBenefitDTO(){
         List <Benefit> benefits = findAll();
-       return benefits.stream().map(benefit -> new BenefitDTO(benefit)).collect(Collectors.toList());
+        List<BenefitDTO> benefitDTOs = new ArrayList<>();
+        for(Benefit b : benefits){
+            benefitDTOs.add(new BenefitDTO(b));
+        }
+        return benefitDTOs;
     }
 
 
