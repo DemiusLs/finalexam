@@ -15,11 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import plants.finalexam.Service.BenefitService;
 import plants.finalexam.dto.BenefitDTO;
-// import plants.finalexam.model.Benefit;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.PutMapping;
-// import org.springframework.web.bind.annotation.RequestBody;
-// import org.springframework.web.bind.annotation.DeleteMapping;
+
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
@@ -45,25 +41,4 @@ public class BenefitRestController {
         return new ResponseEntity<BenefitDTO>(benefitAttempt.get(),HttpStatus.OK );
     }
 
-    // @PostMapping("/create")
-    // public ResponseEntity<Benefit> store(@RequestBody Benefit benefit){
-    //     return new ResponseEntity<Benefit>(benefitService.create(benefit), HttpStatus.CREATED);
-    // }
-
-    // @PutMapping("/{id}")
-    // public ResponseEntity<Benefit> update(@RequestBody Benefit benefit, @PathVariable Integer id){
-    //     if(benefitService.findById(id).isEmpty()){
-    //         return new ResponseEntity<Benefit>(HttpStatus.NOT_FOUND);
-    //     }
-    //     return new ResponseEntity<Benefit>(benefitService.update(benefit) ,HttpStatus.OK);
-    // }
-
-    // @DeleteMapping("/{id}")
-    // public ResponseEntity<Benefit> delete(@PathVariable Integer id){
-    //     if(benefitService.findById(id).isEmpty()){
-    //         return new ResponseEntity<Benefit>(HttpStatus.NOT_FOUND);
-    //     }
-    //     benefitService.deleteById(id);
-    //      return new ResponseEntity<Benefit>(HttpStatus.NO_CONTENT);
-    // }
 }

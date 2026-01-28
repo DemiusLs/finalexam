@@ -16,11 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import plants.finalexam.Service.FamilyService;
 import plants.finalexam.dto.FamilyDTO;
-// import plants.finalexam.model.Family;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.PutMapping;
-// import org.springframework.web.bind.annotation.RequestBody;
-// import org.springframework.web.bind.annotation.DeleteMapping;
+
 
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -47,25 +43,4 @@ public class FamilyRestController {
         return new ResponseEntity<FamilyDTO>(familyAttempt.get(),HttpStatus.OK );
     }
 
-    // @PostMapping("/create")
-    // public ResponseEntity<Family> store(@RequestBody Family family){
-    //     return new ResponseEntity<Family>(familyService.create(family), HttpStatus.CREATED);
-    // }
-
-    // @PutMapping("/{id}")
-    // public ResponseEntity<Family> update(@RequestBody Family family, @PathVariable Integer id){
-    //     if(familyService.findById(id).isEmpty()){
-    //         return new ResponseEntity<Family>(HttpStatus.NOT_FOUND);
-    //     }
-    //     return new ResponseEntity<Family>(familyService.update(family) ,HttpStatus.OK);
-    // }
-
-    // @DeleteMapping("/{id}")
-    // public ResponseEntity<Family> delete(@PathVariable Integer id){
-    //     if(familyService.findById(id).isEmpty()){
-    //         return new ResponseEntity<Family>(HttpStatus.NOT_FOUND);
-    //     }
-    //     familyService.deleteById(id);
-    //      return new ResponseEntity<Family>(HttpStatus.NO_CONTENT);
-    // }
 }

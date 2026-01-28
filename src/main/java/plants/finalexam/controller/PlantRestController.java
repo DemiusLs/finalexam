@@ -15,11 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import plants.finalexam.Service.PlantService;
 import plants.finalexam.dto.PlantDTO;
-// import plants.finalexam.model.Plant;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.PutMapping;
-// import org.springframework.web.bind.annotation.RequestBody;
-// import org.springframework.web.bind.annotation.DeleteMapping;
+
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
@@ -43,25 +39,5 @@ public class PlantRestController {
         return new ResponseEntity<PlantDTO>(plantAttempt.get(), HttpStatus.OK);
     }
 
-    // @PostMapping("/create")
-    // public ResponseEntity<Plant> store(@RequestBody Plant plant){
-    //     return new ResponseEntity<Plant>(plantService.create(plant), HttpStatus.CREATED);
-    // }
-
-    // @PutMapping("/{id}")
-    // public ResponseEntity<Plant> update(@RequestBody Plant plant, @PathVariable Integer id){
-    //     if(plantService.findById(id).isEmpty()){
-    //         return new ResponseEntity<Plant>(HttpStatus.NOT_FOUND);
-    //     }
-    //     return new ResponseEntity<Plant>(plantService.update(plant) ,HttpStatus.OK);
-    // }
-
-    // @DeleteMapping("/{id}")
-    // public ResponseEntity<Plant> delete(@PathVariable Integer id){
-    //     if(plantService.findById(id).isEmpty()){
-    //         return new ResponseEntity<Plant>(HttpStatus.NOT_FOUND);
-    //     }
-    //     plantService.deleteById(id);
-    //      return new ResponseEntity<Plant>(HttpStatus.NO_CONTENT);
-    // }
+    
 }
