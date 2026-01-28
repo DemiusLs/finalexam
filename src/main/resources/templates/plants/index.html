@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <th:block th:replace="~{fragments/resources :: scriptView}"></th:block> 
+    
      <th:block th:replace="~{fragments/resources :: headTags}"></th:block> 
 </head>
 <body>
@@ -38,7 +38,7 @@
                                 <label class="form-label mb-1">Ordina per nome</label>
                                 <select name="sort"
                                         class="form-select"
-                                        onchange="this.form.submit()">
+                                        >
 
                                     <option value="asc"  th:selected="${sort == 'asc'}">A → Z</option>
                                     <option value="desc" th:selected="${sort == 'desc'}">Z → A</option>
@@ -59,15 +59,16 @@
                             <a th:href="@{/plants/create}" class="btn btn-outline-info btn-sm" >Create new plant</a>
                         </div>
 
-                        
-                        <div class="form-check form-switch">
-                            <label class="me-2">Vista Card</label>
-                            <input class="form-check-input" type="checkbox" id="viewSwitch">
+                        <div class="btn-group" role="group" aria-label="View mode">
+                            <a th:href="@{/plants/index(search=${search}, sort=${sort}, view='table')}" class="btn btn-outline-primary" th:classappend="${view == 'table'} ? 'active'">Tabella</a>
+                            
+                            <a th:href="@{/plants/index(search=${search}, sort=${sort}, view='card')}" class="btn btn-outline-primary" th:classappend="${view == 'card'} ? 'active'">Card</a>
+
                         </div>
                     </div>
                 </div>
 
-                <div id="tableView">
+                <div id="tableView" th:if="${view == 'table'}">
                             <div class="col-12" th:if="${plants.size() > 0}">
                                 <div class="table">
                                         <table class="table table-striped align-middle">
@@ -145,7 +146,7 @@
                         </div>
                     </div>              
 
-                    <div id="cardView" >
+                    <div id="cardView" th:if="${view == 'card'}" >
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
                             <div class="col" th:each="plant : ${plants}">
                                 <a th:href="@{/plants/{id}(id=${plant.id})}" class="text-decoration-none text-dark">

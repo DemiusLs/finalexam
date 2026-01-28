@@ -11,46 +11,7 @@
             <!-- <link th:rel="stylesheet" th:href="@{/css/style.css}"> -->
      </th:block>
 
-     <th:block th:fragment="scriptView">
-      <script>
-            const VIEW_KEY = 'plantsViewMode';
 
-            (function () {
-            var mode = localStorage.getItem(VIEW_KEY) || 'table';
-            var css;
-            if (mode === 'card') {
-                css = '#tableView { display: none; }';
-            } else {
-                css = '#cardView { display: none; }';
-            }
-            var style = document.createElement('style');
-            style.textContent = css;
-            document.head.appendChild(style);
-            window.addEventListener('DOMContentLoaded', function () {
-                var tableView = document.getElementById('tableView');
-                var cardView  = document.getElementById('cardView');
-                var switchEl  = document.getElementById('viewSwitch');
-
-                // inizializzo lo switch
-                switchEl.checked = (mode === 'card');
-
-                switchEl.addEventListener('change', function () {
-                var newMode = this.checked ? 'card' : 'table';
-                localStorage.setItem(VIEW_KEY, newMode);
-
-                if (newMode === 'card') {
-                    tableView.style.display = 'none';
-                    cardView.style.display = '';
-                } else {
-                    cardView.style.display = 'none';
-                    tableView.style.display = '';
-                }
-                window.location.reload();
-                });
-            });
-            })();
-        </script>
-    </th:block>
     
     
 </head>

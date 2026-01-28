@@ -36,11 +36,12 @@ public class PlantController {
     private FamilyService familyService;
     
     @GetMapping("/index")
-    public String index(Model model, @RequestParam(name = "sort", required = false , defaultValue = "asc") String sort, @RequestParam(name = "search" , required = false) String search){
+    public String index(Model model, @RequestParam(name = "sort", required = false , defaultValue = "asc") String sort, @RequestParam(name = "search" , required = false) String search, @RequestParam(name = "view", required = false,defaultValue = "table") String view){
         List<Plant> plants = plantService.searchAndSort(search,sort);
         model.addAttribute("plants",plants);
         model.addAttribute("search" , search);
         model.addAttribute("sort" , sort);
+        model.addAttribute("view" , view);
         return "/plants/index";
     }
 
